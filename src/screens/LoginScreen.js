@@ -16,9 +16,9 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
 
-  const doSingIn = async (usedEmail, usedPassword) => {
+  const doSingIn = async (email, password) => {
     try {
-      let response = await auth().signInWithEmailAndPassword(usedEmail, usedPassword)
+      let response = await auth().signInWithEmailAndPassword(email, password)
       if (response && response.user) {
         Alert.alert("Success ✅", "Authenticated successfully")
       }

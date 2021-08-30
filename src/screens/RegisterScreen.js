@@ -18,9 +18,9 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   
-  const doCreateUser = async (usedEmail, usedPassword) =>{
+  const doCreateUser = async (email, password) =>{
     try {
-     let response =  await auth().createUserWithEmailAndPassword(usedEmail, usedPassword);
+     let response =  await auth().createUserWithEmailAndPassword(email, password);
       if(response){
         console.log(tag,"?",response)
       }
