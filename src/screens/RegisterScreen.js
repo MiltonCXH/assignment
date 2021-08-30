@@ -20,7 +20,6 @@ export default function RegisterScreen({ navigation }) {
   
   const doCreateUser = async (email, password) =>{
     try {
-      console.log(email.value + " " + password.value)
       let response =  await firebase.auth().createUserWithEmailAndPassword(email.value, password.value);
         if(response){
           console.log(tag,"?",response)

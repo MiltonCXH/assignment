@@ -18,7 +18,6 @@ export default function LoginScreen({ navigation }) {
 
   const doSingIn = async (email, password) => {
     try {
-      console.log(email + " " + password)
       let response = await auth().signInWithEmailAndPassword(email.value, password.value)
       if (response && response.user) {
         Alert.alert("Success ✅", "Authenticated successfully")
