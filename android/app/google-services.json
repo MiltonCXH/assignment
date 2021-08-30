@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "52976511114",
+    "firebase_url": "https://wadassignment-74a84-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "wadassignment-74a84",
+    "storage_bucket": "wadassignment-74a84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52976511114:android:09bd683779598ad25f6573",
+        "android_client_info": {
+          "package_name": "com.assignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52976511114-i7dj16qrlsud4u450e8t85eou0kihail.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1LeXy1OXudlxQYVbdJVxugfF9otGmItM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52976511114-i7dj16qrlsud4u450e8t85eou0kihail.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
