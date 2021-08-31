@@ -6,8 +6,6 @@ import Paragraph from '../components/Paragraph'
 import Button from '../components/Button'
 import auth, { firebase } from "@react-native-firebase/auth"
 
-
-
 export default function Dashboard({ navigation }) {
   return (
     <Background>

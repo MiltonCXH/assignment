@@ -6,16 +6,29 @@ import Header from '../components/Header'
 import TextInput from '../components/TextInput'
 import Button from '../components/Button'
 import { emailValidator } from '../helpers/emailValidator'
+import auth, { firebase } from "@react-native-firebase/auth"
 
 export default function ResetPasswordScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
-
+  
+  handlePasswordReset = async (email) => {
+    try {
+      await firebase.auth().sendPasswordResetEmail(email.value)
+      console.log('Password reset email sent successfully')
+    } catch (e) {
+      console.error(e.message)
+    }
+  }
+  
   const sendResetPasswordEmail = () => {
     const emailError = emailValidator(email.value)
     if (emailError) {
       setEmail({ ...email, error: emailError })
       return
     }
+
+    handlePasswordReset(email)
+
     navigation.navigate('LoginScreen')
   }
 
