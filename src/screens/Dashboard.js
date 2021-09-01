@@ -1,10 +1,4 @@
-import React, { setState } from 'react'
-import Background from '../components/Background'
-import Header from '../components/Header'
-import Paragraph from '../components/Paragraph'
-import Button from '../components/Button'
-import auth, { firebase } from "@react-native-firebase/auth"
-import App from '../../App'
+import React, { Component, useState } from 'react'
 import {
   View,
   Text,
@@ -29,10 +23,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // THEME IMPORT
-import * as theme from '../../Constants/theme';
+import * as theme from '../Constants/theme';
 
 // HELPER IMPORT
-import helper from '../../Constants/helper';
+import helper from '../Constants/helper';
 
 // CONSTANTS
 const WIDTH = Dimensions.get('window').width;
@@ -56,44 +50,49 @@ const Drawer = createDrawerNavigator();
 //  </Background>
 //)
 
+class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: ['Monitors'],
+      selectedCatogoryIndex: 0,
+      products: [
+        {
+          name: 'Monitor 1',
+          images: [require('../assets/images/p1.jpg')],
+          price: '$299',
+        },
+        {
+          name: 'Monitor 2',
+          images: [require('../assets/images/p2.jpg')],
+          price: '$249',
+        },
+        {
+          name: 'Monitor 3',
+          images: [require('../assets/images/p3.png')],
+          price: '$499',
+        },
+        {
+          name: 'Monitor 4',
+          images: [require('../assets/images/p4.png')],
+          price: '$199',
+        },
+        {
+          name: `Monitor 5`,
+          images: [require('../assets/images/p5.png')],
+          price: '$499',
+        },
+        {
+          name: 'Monitor 6',
+          images: [require('../assets/images/p6.png')],
+          price: '$399',
+        },
+      ],
+    };
+  }
 
-export default function Dashboard() {
-  super(props);
-  this.state = {
-    categories: ['New arrivals', 'Monitors', 'Rice Cookers', 'Microwaves', 'Trends'],
-    selectedCatogoryIndex: 0,
-    products: [
-      {
-        name: 'Monitor 1',
-        images: [require('../../../assets/images/p1.jpg')],
-        price: '$299',
-      },
-      {
-        name: 'Monitor 2',
-        images: [require('../../../assets/images/p2.jpg')],
-        price: '$249',
-      },
-      {
-        name: 'Monitor 3',
-        images: [require('../../../assets/images/p3.png')],
-        price: '$499',
-      },
-      {
-        name: 'Monitor 4',
-        images: [require('../../../assets/images/p4.png')],
-        price: '$199',
-      },
-      {
-        name: `Monitor 5`,
-        images: [require('../../../assets/images/p5.png')],
-        price: '$499',
-      },
-      {
-        name: 'Monitor 6',
-        images: [require('../../../assets/images/p6.png')],
-        price: '$399',
-      },
-    ],
+  static navigationOptions = {
+    headerShown: false,
   };
 
   // LIFECYCLE METHODS
@@ -107,15 +106,9 @@ export default function Dashboard() {
   Header = () => {
     return (
       <View style={{ ...styles.header }}>
-        <Ionicons name={'chevron-back'} size={EStyleSheet.value('25rem')} color={'red'} />
+        <Ionicons name={'chevron-back'} size={EStyleSheet.value('25rem')} color={'black'} />
         <Text style={{ fontSize: EStyleSheet.value('16rem'), fontWeight: '600' }}>Shopping</Text>
-        <NavigationContainer>
-          <Drawer.Navigator initialRouteName="Home">
-            <FontAwesome name={'sliders'} size={EStyleSheet.value('25rem')} color={'black'} />
-          </Drawer.Navigator>
-        </NavigationContainer>
-
-
+        <FontAwesome name='sliders' size={EStyleSheet.value('25rem')} color={'black'} />
       </View>
     );
   };
@@ -140,10 +133,7 @@ export default function Dashboard() {
           justifyContent: 'space-evenly',
           padding: theme.appDims.boundary,
         }}>
-        <TouchableOpacity style={styles.button} onPress={() => { alert("you clicked me") }}>
-          <Image source={item.images[0]} style={{ height: EStyleSheet.value('130rem'), aspectRatio: 1, resizeMode: 'contain', alignSelf: 'center' }} />
-        </TouchableOpacity>
-
+        <Image source={item.images[0]} style={{ height: EStyleSheet.value('130rem'), aspectRatio: 1, resizeMode: 'contain', alignSelf: 'center' }} />
         <View>
           <Text style={{ fontSize: EStyleSheet.value('16rem'), fontWeight: '600' }}>{item.price}</Text>
           <Text style={{ fontSize: EStyleSheet.value('14rem'), fontWeight: '400', color: 'grey' }}>{item.name}</Text>
@@ -216,54 +206,52 @@ export default function Dashboard() {
 
   // RENDERING FUNCTIONS
 
-  const { Header, Separator, Product } = this;
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <Header />
-      <Separator />
-
-      {/* CATEGORIES */}
-      <View>
-        <ScrollView
-          horizontal
-          contentContainerStyle={{ paddingHorizontal: theme.appDims.boundary, paddingVertical: EStyleSheet.value('10rem') }}
-          showsHorizontalScrollIndicator={false}>
-          {this.state.categories.map((item, index) => {
-            return (
-              <TouchableOpacity
-                key={index.toString()}
-                style={{ marginRight: EStyleSheet.value('16rem') }}
-                onPress={() => this.setState({ selectedCatogoryIndex: index })}>
-                <Text
-                  style={{
-                    fontSize: EStyleSheet.value('14rem'),
-                    fontWeight: this.state.selectedCatogoryIndex == index ? '600' : '400',
-                    color: this.state.selectedCatogoryIndex == index ? 'black' : 'grey',
-                  }}>
-                  {item}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
+  render() {
+    const { Header, Separator, Product } = this;
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <Header />
         <Separator />
-      </View>
 
-      {/* PRODUCTS */}
-      <FlatList
-        data={this.state.products}
-        renderItem={({ item, index }) => <Product item={item} index={index} />}
-        numColumns={2}
-        keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={false}
-      />
-    </SafeAreaView>
-  );
+        {/* CATEGORIES */}
+        <View>
+          <ScrollView
+            horizontal
+            contentContainerStyle={{ paddingHorizontal: theme.appDims.boundary, paddingVertical: EStyleSheet.value('10rem') }}
+            showsHorizontalScrollIndicator={false}>
+            {this.state.categories.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={index.toString()}
+                  style={{ marginRight: EStyleSheet.value('16rem') }}
+                  onPress={() => this.setState({ selectedCatogoryIndex: index })}>
+                  <Text
+                    style={{
+                      fontSize: EStyleSheet.value('14rem'),
+                      fontWeight: this.state.selectedCatogoryIndex == index ? '600' : '400',
+                      color: this.state.selectedCatogoryIndex == index ? 'black' : 'grey',
+                    }}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+          <Separator />
+        </View>
+
+        {/* PRODUCTS */}
+        <FlatList
+          data={this.state.products}
+          renderItem={({ item, index }) => <Product item={item} index={index} />}
+          numColumns={2}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+        />
+      </SafeAreaView>
+    );
+  }
   // END RENDERING FUNCTIONS
-}
-
-Dashboard.navigationOptions = {
-  headerShown: false,
 }
 
 const styles = EStyleSheet.create({
@@ -285,3 +273,5 @@ const styles = EStyleSheet.create({
     color: 'white',
   },
 });
+
+export default Dashboard;
