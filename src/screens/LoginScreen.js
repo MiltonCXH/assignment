@@ -19,6 +19,8 @@ export default function LoginScreen({ navigation }) {
   const doSingIn = async (email, password) => {
     try {
       let response = await auth().signInWithEmailAndPassword(email.value, password.value)
+      .then(() => navigation.navigate('SignedIn'))
+
       if (response && response.user) {
         Alert.alert("Success ✅", "Authenticated successfully")
       }
@@ -37,11 +39,6 @@ export default function LoginScreen({ navigation }) {
     }
 
     doSingIn(email, password)
-
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
-    })
   }
 
   return (

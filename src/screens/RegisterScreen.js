@@ -20,10 +20,11 @@ export default function RegisterScreen({ navigation }) {
   
   const doCreateUser = async (email, password) =>{
     try {
-      let response =  await firebase.auth().createUserWithEmailAndPassword(email.value, password.value);
-        if(response){
-          console.log(tag,"?",response)
-        }
+      let response =  await firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+      .then(() => navigation.navigate('SignedIn'));
+      if(response){
+        console.log(tag,"?",response)
+      }
     } catch (e) {
       console.error(e.message);
     }
@@ -41,11 +42,6 @@ export default function RegisterScreen({ navigation }) {
     }
 
     doCreateUser(email, password)
-
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
-    })
   }
 
   return (
