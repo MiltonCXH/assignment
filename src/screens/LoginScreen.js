@@ -15,7 +15,7 @@ import auth, { firebase } from "@react-native-firebase/auth"
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-
+  
   const doSingIn = async (email, password) => {
     try {
       let response = await auth().signInWithEmailAndPassword(email.value, password.value)
