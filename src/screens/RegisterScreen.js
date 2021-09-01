@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
@@ -12,6 +11,7 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 import auth, { firebase } from "@react-native-firebase/auth"
+import "@react-native-firebase/firestore"
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: '', error: '' })
@@ -20,8 +20,30 @@ export default function RegisterScreen({ navigation }) {
   
   const doCreateUser = async (email, password) =>{
     try {
-      let response =  await firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
-      .then(() => navigation.navigate('SignedIn'));
+      let response =  await firebase
+      .auth().createUserWithEmailAndPassword(email.value, password.value)
+      .then((response) => {
+        const uid = response.user.uid
+        const data = {
+          id: uid,
+          email: email.value,
+          name: name.value,
+        };
+        const usersRef = firebase.firestore().collection('users')
+        usersRef
+          .doc(uid)
+          .set(data)
+          .then(() => {
+            navigation.navigate('Dashboard', {user: data})
+          })
+          .catch((error) => {
+            alert(error)
+          });
+      })
+      .catch((error) => {
+        alert(error)
+      })
+
       if(response){
         console.log(tag,"?",response)
       }
@@ -47,8 +69,7 @@ export default function RegisterScreen({ navigation }) {
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
-      <Logo />
-      <Header>Create Account</Header>
+      <Header>CREATE ACCOUNT</Header>
       <TextInput
         label="Name"
         returnKeyType="next"
@@ -83,7 +104,7 @@ export default function RegisterScreen({ navigation }) {
         onPress={onSignUpPressed}
         style={{ marginTop: 24 }}
       >
-        Sign Up
+        SIGN UP
       </Button>
       <View style={styles.row}>
         <Text>Already have an account? </Text>

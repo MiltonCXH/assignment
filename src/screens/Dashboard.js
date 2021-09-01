@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { setState } from 'react'
 import Background from '../components/Background'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Paragraph from '../components/Paragraph'
 import Button from '../components/Button'
 import auth, { firebase } from "@react-native-firebase/auth"
+import App from '../../App'
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard(props) {
+  
+  
   return (
     <Background>
-      <Logo />
       <Header>Let’s start</Header>
       <Paragraph>
         Your amazing app starts here. Open you favorite code editor and start
@@ -18,13 +19,8 @@ export default function Dashboard({ navigation }) {
       <Button
         mode="outlined"
         onPress={async () => {
-            await firebase.auth().signOut();
-          },
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'StartScreen' }],
-          })
-        }
+            await firebase.auth().signOut()
+        }}
       >
         Logout
       </Button>

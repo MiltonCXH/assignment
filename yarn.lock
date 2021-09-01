@@ -1185,7 +1185,7 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/masked-view/-/masked-view-0.1.11.tgz"
   "version" "0.1.11"
 
-"@react-native-firebase/app@^12.7.3", "@react-native-firebase/app@12.7.3":
+"@react-native-firebase/app@^12.7.3", "@react-native-firebase/app@12.7.3", "@react-native-firebase/app@12.7.4":
   "integrity" "sha512-dp4lbLM0xJsR8mT5PHrCGSoCMCZ0KrXFIt69pAsjaQ22AEr2ETeBrCxbwHQjXylfPrg1PudqADzMIifS44Qq9g=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/app/-/app-12.7.3.tgz"
   "version" "12.7.3"
@@ -1198,6 +1198,11 @@
   "integrity" "sha512-BksvXxIJLxxnAY0v476XxIZA9F46p+wRCX5VMpLBnfXN7BThpT1nl0aqTs1Da4pIEmYTOuGcV+afbs46uklQ4A=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/auth/-/auth-12.7.3.tgz"
   "version" "12.7.3"
+
+"@react-native-firebase/firestore@^12.7.4":
+  "integrity" "sha512-UOyBNxV5Lj2aIK1jFY/ZpPLpp0iSVTerVvTW6rOBOnNlyzrTmvVrMXoMhus454IDRzS+5X5pUt2oRP7ruSM16Q=="
+  "resolved" "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-12.7.4.tgz"
+  "version" "12.7.4"
 
 "@react-native/assets@1.0.0":
   "integrity" "sha512-KrwSpS1tKI70wuKl68DwJZYEvXktDHdZMG0k2AXD/rJVSlB23/X2CB2cutVR0HwNMJIal9HOUOBB2rVfa6UGtQ=="
@@ -6003,6 +6008,11 @@
   "integrity" "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   "version" "17.0.2"
+
+"react-native-base64@^0.2.1":
+  "integrity" "sha512-eHgt/MA8y5ZF0aHfZ1aTPcIkDWxza9AaEk4GcpIX+ZYfZ04RcaNahO+527KR7J44/mD3efYfM23O2C1N44ByWA=="
+  "resolved" "https://registry.npmjs.org/react-native-base64/-/react-native-base64-0.2.1.tgz"
+  "version" "0.2.1"
 
 "react-native-gesture-handler@^1.0.12", "react-native-gesture-handler@^1.10.3", "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-cBGMi1IEsIVMgoox4RvMx7V2r6bNKw0uR1Mu1o7NbuHS6BRSVLq0dP34l2ecnPlC+jpWd3le6Yg1nrdCjby2Mw=="

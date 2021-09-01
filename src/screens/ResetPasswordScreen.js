@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Background from '../components/Background'
 import BackButton from '../components/BackButton'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
 import TextInput from '../components/TextInput'
 import Button from '../components/Button'
@@ -35,8 +34,7 @@ export default function ResetPasswordScreen({ navigation }) {
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
-      <Logo />
-      <Header>Restore Password</Header>
+      <Header>RESET PASSWORD</Header>
       <TextInput
         label="E-mail address"
         returnKeyType="done"
@@ -55,7 +53,7 @@ export default function ResetPasswordScreen({ navigation }) {
         onPress={sendResetPasswordEmail}
         style={{ marginTop: 16 }}
       >
-        Send Instructions
+        SEND TO EMAIL
       </Button>
     </Background>
   )

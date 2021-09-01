@@ -1,6 +1,5 @@
 import React from 'react'
 import Background from '../components/Background'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import Paragraph from '../components/Paragraph'
@@ -8,10 +7,9 @@ import Paragraph from '../components/Paragraph'
 export default function StartScreen({ navigation }) {
   return (
     <Background>
-      <Logo />
-      <Header>Login Template</Header>
+      <Header>ELECTRONIC STORE</Header>
       <Paragraph>
-        The easiest way to start with your amazing application.
+        Welcome to the app to have all your electronic needs satisfied.
       </Paragraph>
       <Button
         mode="contained"

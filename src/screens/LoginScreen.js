@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
@@ -11,6 +10,8 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import auth, { firebase } from "@react-native-firebase/auth"
+import "@react-native-firebase/firestore"
+import { NavigationActions } from 'react-navigation'
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -18,8 +19,29 @@ export default function LoginScreen({ navigation }) {
 
   const doSingIn = async (email, password) => {
     try {
-      let response = await auth().signInWithEmailAndPassword(email.value, password.value)
-      .then(() => navigation.navigate('SignedIn'))
+      let response = await firebase
+        .auth().signInWithEmailAndPassword(email.value, password.value)
+        .then((response) => {
+          const uid = response.user.uid
+          const usersRef = firebase.firestore().collection('users')
+          usersRef
+              .doc(uid)
+              .get()
+              .then(firestoreDocument => {
+                  if (!firestoreDocument.exists) {
+                      alert("User does not exist anymore.")
+                      return;
+                  }
+                  const user = firestoreDocument.data()
+                  navigation.navigate('Dashboard', {user: user})
+              })
+              .catch(error => {
+                  alert(error)
+              });
+      })
+      .catch(error => {
+          alert(error)
+      })
 
       if (response && response.user) {
         Alert.alert("Success ✅", "Authenticated successfully")
@@ -44,8 +66,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
-      <Logo />
-      <Header>Welcome back.</Header>
+      <Header>WELCOME BACK</Header>
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -75,7 +96,7 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       <Button mode="contained" onPress={onLoginPressed}>
-        Login
+        LOGIN
       </Button>
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>

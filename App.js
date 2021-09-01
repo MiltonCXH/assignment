@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-native-paper'
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
@@ -21,66 +21,66 @@ import {
 } from './src/screens'
 
 import firebase from '@react-native-firebase/app';
+import { State } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator()
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu',
-});
+export default function App() {
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
 
-type Props = {};
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('users');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data()
+            setLoading(false)
+            setUser(userData)
+          })
+          .catch((error) => {
+            setLoading(false)
+          });
+      } else {
+        setUser(null)
+        setLoading(false)
+      }
+    });
+  }, []);
 
-const tag = "FIREBASE";
-export default class App extends Component<Props> {
-  state = {
-    isLogin: false,
-    authenticated: false
-  }
-
-  componentDidMount() {
-    this.isTheUserAuthenticated();
-  }
-
-  isTheUserAuthenticated = () => {
-    let user = firebase.auth().currentUser;
-    if (user) {
-      console.log(tag, user);
-
-      this.setState({ authenticated: true });
-    } else {
-      this.setState({ authenticated: false });
-    }
-  };
-
-  render() {
+  if (loading) {
     return (
-      <Provider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="StartScreen"
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="StartScreen" component={StartScreen} />
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen
-            name="ResetPasswordScreen"
-            component={ResetPasswordScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      {!firebase.apps.length && (
-        <Text style={styles.instructions}>
-          {`\nYou currently have no Firebase apps registered, this most likely means you've not downloaded your project credentials. Visit the link below to learn more. \n\n ${firebaseCredentials}`}
-        </Text>
-      )}
-    </Provider>
-    );
+      <></>
+    )
   }
+  
+  return (
+    <Provider theme={theme}>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        { user ? (
+          <Stack.Screen name="Dashboard">
+            {props => <Dashboard {...props} extraData={user} />}
+          </Stack.Screen>
+        ) : (
+          <>
+            <Stack.Screen name="StartScreen" component={StartScreen} />
+            <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+            <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
