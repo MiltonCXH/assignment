@@ -8,8 +8,9 @@ import {
     LoginScreen,
     RegisterScreen,
     ResetPasswordScreen,
+    Dashboard,
+    LogOutScreen
 } from './screens';
-import Dashboard from './screens';
 
 import firebase from '@react-native-firebase/app';
 
@@ -58,8 +59,10 @@ export default function AppFlow() {
                 }}
             >
                 {user ? (
-                    <Stack.Screen name="Home" component={Dashboard} />
-
+                    <>
+                        <Stack.Screen name="Home" component={Dashboard} />
+                        <Stack.Screen name="LogOutScreen" component={LogOutScreen} />
+                    </>
                 ) : (
                     <>
                         <Stack.Screen name="StartScreen" component={StartScreen} />

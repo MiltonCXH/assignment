@@ -106,7 +106,10 @@ class Dashboard extends Component {
   Header = () => {
     return (
       <View style={{ ...styles.header }}>
-        <Ionicons name={'chevron-back'} size={EStyleSheet.value('25rem')} color={'black'} />
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('LogOutScreen')}>
+          <Ionicons name={'chevron-back'} size={EStyleSheet.value('25rem')} color={'black'} />
+        </TouchableOpacity>
         <Text style={{ fontSize: EStyleSheet.value('16rem'), fontWeight: '600' }}>Shopping</Text>
         <FontAwesome name='sliders' size={EStyleSheet.value('25rem')} color={'black'} />
       </View>
