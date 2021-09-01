@@ -21,7 +21,6 @@ import {
 } from './src/screens'
 
 import firebase from '@react-native-firebase/app';
-import { State } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator()
 
@@ -69,6 +68,7 @@ export default function App() {
           <Stack.Screen name="Dashboard">
             {props => <Dashboard {...props} extraData={user} />}
           </Stack.Screen>
+          
         ) : (
           <>
             <Stack.Screen name="StartScreen" component={StartScreen} />
