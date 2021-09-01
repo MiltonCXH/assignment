@@ -19,7 +19,7 @@ export default function Dashboard(props) {
       <Button
         mode="outlined"
         onPress={async () => {
-            await firebase.auth().signOut()
+          await firebase.auth().signOut()
         }}
       >
         Logout

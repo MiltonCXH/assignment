@@ -26,7 +26,7 @@ import { State } from 'react-native-gesture-handler';
 const Stack = createStackNavigator()
 
 export default function App() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function App() {
         }}
       >
         { user ? (
-          <Stack.Screen name="Dashboard">
+          <Stack.Screen name="Home">
             {props => <Dashboard {...props} extraData={user} />}
           </Stack.Screen>
         ) : (

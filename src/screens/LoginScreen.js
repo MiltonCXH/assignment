@@ -11,7 +11,6 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import auth, { firebase } from "@react-native-firebase/auth"
 import "@react-native-firebase/firestore"
-import { NavigationActions } from 'react-navigation'
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -33,7 +32,7 @@ export default function LoginScreen({ navigation }) {
                       return;
                   }
                   const user = firestoreDocument.data()
-                  navigation.navigate('Dashboard', {user: user})
+                  navigation.navigate('Home', {user: user})
               })
               .catch(error => {
                   alert(error)
