@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Provider } from 'react-native-paper'
+import { Drawer, Provider } from 'react-native-paper'
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { theme } from './core/theme';
@@ -8,13 +8,15 @@ import {
     LoginScreen,
     RegisterScreen,
     ResetPasswordScreen,
-    Dashboard,
-    LogOutScreen
+    LogOutScreen, 
+    HomeScreen,
+    DetailsScreen
 } from './screens';
-
+import 'react-native-gesture-handler';
 import firebase from '@react-native-firebase/app';
 
 const Stack = createStackNavigator()
+
 
 export default function AppFlow() {
     const [loading, setLoading] = useState(false)
@@ -60,8 +62,9 @@ export default function AppFlow() {
             >
                 {user ? (
                     <>
-                        <Stack.Screen name="Home" component={Dashboard} />
+                        <Stack.Screen name="Home" component={HomeScreen} />
                         <Stack.Screen name="LogOutScreen" component={LogOutScreen} />
+                        <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
                     </>
                 ) : (
                     <>
