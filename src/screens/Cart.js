@@ -32,25 +32,9 @@ import helper from '../Constants/helper';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const Drawer = createDrawerNavigator();
-//return (
-//  <Background>
-//    <Header>Let’s start</Header>
-//    <Paragraph>
-//      Your amazing app starts here. Open you favorite code editor and start
-//      editing this project.
-//    </Paragraph>
-//    <Button
-//      mode="outlined"
-//      onPress={async () => {
-//        await firebase.auth().signOut()
-//      }}
-//    >
-//      Logout
-//    </Button>
-//  </Background>
-//)
 
-class Dashboard extends Component {
+
+class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -110,12 +94,12 @@ class Dashboard extends Component {
           onPress={() => this.props.navigation.navigate('LogOutScreen')}>
           <Ionicons name={'chevron-back'} size={EStyleSheet.value('25rem')} color={'black'} />
         </TouchableOpacity>
-        <Text style={{ fontSize: EStyleSheet.value('16rem'), fontWeight: '600' }}>Shopping</Text>
-
+        <Text style={{ fontSize: EStyleSheet.value('16rem'), fontWeight: '600' }}>Cart</Text>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('Cart')}>
+          onPress={() => this.props.navigation.navigate('LogOutScreen')}>
         <FontAwesome name='sliders' size={EStyleSheet.value('25rem')} color={'black'} />
         </TouchableOpacity>
+       
       </View>
     );
   };
@@ -253,7 +237,7 @@ class Dashboard extends Component {
         <FlatList
           data={this.state.products}
           renderItem={({ item, index }) => <Product item={item} index={index} />}
-          numColumns={2}
+          numColumns={1}
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
         />
@@ -283,4 +267,4 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default Dashboard;
+export default Cart;
