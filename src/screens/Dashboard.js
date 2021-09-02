@@ -32,23 +32,6 @@ import helper from '../Constants/helper';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const Drawer = createDrawerNavigator();
-//return (
-//  <Background>
-//    <Header>Let’s start</Header>
-//    <Paragraph>
-//      Your amazing app starts here. Open you favorite code editor and start
-//      editing this project.
-//    </Paragraph>
-//    <Button
-//      mode="outlined"
-//      onPress={async () => {
-//        await firebase.auth().signOut()
-//      }}
-//    >
-//      Logout
-//    </Button>
-//  </Background>
-//)
 
 class Dashboard extends Component {
   constructor(props) {
