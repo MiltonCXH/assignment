@@ -10,7 +10,8 @@ import {
     ResetPasswordScreen,
     LogOutScreen, 
     HomeScreen,
-    DetailsScreen
+    DetailsScreen,
+    Cart
 } from './screens';
 import 'react-native-gesture-handler';
 import firebase from '@react-native-firebase/app';
@@ -65,6 +66,7 @@ export default function AppFlow() {
                         <Stack.Screen name="Home" component={HomeScreen} />
                         <Stack.Screen name="LogOutScreen" component={LogOutScreen} />
                         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+                        <Stack.Screen name="Cart" component={Cart} />
                     </>
                 ) : (
                     <>

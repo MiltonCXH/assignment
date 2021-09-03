@@ -143,13 +143,13 @@ const style = StyleSheet.create({
   buyBtn: {
     width: 130,
     height: 50,
-    backgroundColor: COLORS.green,
+    backgroundColor: COLORS.purple,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
   },
   priceTag: {
-    backgroundColor: COLORS.green,
+    backgroundColor: COLORS.purple,
     width: 80,
     height: 40,
     justifyContent: 'center',

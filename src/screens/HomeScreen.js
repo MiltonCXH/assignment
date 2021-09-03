@@ -8,6 +8,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
@@ -18,7 +19,7 @@ const HomeScreen = ({navigation}) => {
   const [catergoryIndex, setCategoryIndex] = React.useState(0);
 
   const categories = ['POPULAR', 'LATEST', 'TOPSALES', 'PREFERRED'];
-
+  
   const CategoryList = () => {
     return (
       <View style={style.categoryContainer}>
@@ -41,6 +42,7 @@ const HomeScreen = ({navigation}) => {
   };
 
   const Card = ({monitor}) => {
+
     return (
       <TouchableOpacity
         activeOpacity={0.8}
@@ -93,7 +95,7 @@ const HomeScreen = ({navigation}) => {
               style={{
                 height: 25,
                 width: 25,
-                backgroundColor: COLORS.green,
+                backgroundColor: COLORS.purple,
                 borderRadius: 5,
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -115,14 +117,18 @@ const HomeScreen = ({navigation}) => {
         <View>
         <TouchableOpacity
           onPress={() => navigation.navigate('LogOutScreen')}>
-          <Icon name="arrow-left" size={50} color={COLORS.black} style={{marginLeft: 250, marginTop: -10}}/>
+          <Icon name="logout" size={30} color={COLORS.black} style={{marginLeft: 5, marginTop: -5}}/>
         </TouchableOpacity>
           <Text style={{fontSize: 25, fontWeight: 'bold'}}>Welcome to</Text>
-          <Text style={{fontSize: 38, color: COLORS.green, fontWeight: 'bold'}}>
+          <Text style={{fontSize: 38, color: COLORS.purple, fontWeight: 'bold'}}>
             Electronic Store
           </Text>
         </View>
+        {/**EDIT HERE                                                                                EDIT HERE*/}
+        <TouchableOpacity
+        onPress={() => navigation.navigate('Cart')}>
         <Icon name="shopping-cart" size={28} />
+        </TouchableOpacity>
       </View>
       <View style={{marginTop: 30, flexDirection: 'row'}}>
         <View style={style.searchContainer}>
@@ -160,10 +166,10 @@ const style = StyleSheet.create({
   },
   categoryText: {fontSize: 16, color: 'grey', fontWeight: 'bold'},
   categoryTextSelected: {
-    color: COLORS.green,
+    color: COLORS.purple,
     paddingBottom: 5,
     borderBottomWidth: 2,
-    borderColor: COLORS.green,
+    borderColor: COLORS.purple,
   },
   card: {
     height: 225,
@@ -198,7 +204,7 @@ const style = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 10,
-    backgroundColor: COLORS.green,
+    backgroundColor: COLORS.purple,
     justifyContent: 'center',
     alignItems: 'center',
   },
